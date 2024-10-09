@@ -5,7 +5,19 @@
     gap: 1rem;
     justify-content: center;
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 5rem;
+  }
+  .media-img-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .media-img {
+    flex-grow: 1;
+    max-width: 100%;
+    flex-basis: 0;
   }
 {%- endstyle -%}
 
@@ -24,14 +36,38 @@
             {% endfor %}
           </ul>
         </div>
-        <div>
-          <b>Product image</b>
-          <img
-            src="{{ block.settings.product.featured_image | image_url }}"
-            width="100%"
-            height="auto"
-          >
-        </div>
+        {%- if block.settings.product.featured_image != null -%}
+          <div>
+            <b>Product image</b>
+            <img
+              src="{{ block.settings.product.featured_image | image_url }}"
+              height="auto"
+              width="100%"
+            >
+          </div>
+        {%- else -%}
+          There are no images
+        {%- endif -%}
+
+        {%- if block.settings.product.featured_media != null -%}
+          <div>
+            <b>Product media</b>
+            <div class="media-img-container">
+              {%- if block.settings.product.media[1] != null -%}
+                {%- for media in block.settings.product.media -%}
+                  <img
+                    class="media-img"
+                    src="{{ media | image_url }}"
+                    width="300"
+                    height="auto"
+                  >
+                {%- endfor %}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- else -%}
+          There are no medias
+        {%- endif -%}
       </div>
   {%- endcase -%}
 {%- endfor -%}
