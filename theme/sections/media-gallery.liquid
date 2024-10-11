@@ -22,33 +22,35 @@
 {%- endstyle -%}
 
 {%- javascript -%}
-  document.querySelector('.add-to-cart-form')?.addEventListener('submit', function (e) {
-    console.log(123);
-    e.preventDefault();
-    let formData = new FormData(this);
-    this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
-    if (this.cart) {
-      formData.append(
-        'sections',
-        this.cart.getSectionsToRender().map((section) => section.id)
-      );
-      formData.append('sections_url', window.location.pathname);
-      this.cart.setActiveElement(document.activeElement);
-    }
+  document.querySelectorAll('.add-to-cart-form').forEach((form) => {
+    form.addEventListener('submit', function (e) {
+      console.log(123);
+      e.preventDefault();
+      let formData = new FormData(this);
+      this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+      if (this.cart) {
+        formData.append(
+          'sections',
+          this.cart.getSectionsToRender().map((section) => section.id)
+        );
+        formData.append('sections_url', window.location.pathname);
+        this.cart.setActiveElement(document.activeElement);
+      }
 
-    fetch('/cart/add.js', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.sections) {
-          this.cart.renderContents(response);
-        }
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData,
       })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.sections) {
+            this.cart.renderContents(response);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
   });
 {%- endjavascript -%}
 
