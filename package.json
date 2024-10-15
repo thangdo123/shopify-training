@@ -8,9 +8,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tw": "npx tailwindcss -i ./style.css -o ./theme/assets/output.css --full"
+    "tw": "npx tailwindcss -i ./style.css -o ./theme/assets/output.css --watch"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "alpinejs": "^3.14.1"
+  }
 }

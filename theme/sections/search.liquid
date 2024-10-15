@@ -1,0 +1,83 @@
+<script></script>
+
+{% comment %}
+  {%- style -%}
+    #predictive-search-results-groups-wrapper {
+      flex-direction: column;
+    }
+
+    .predictive-search__result-group {
+      flex: 0;
+    }
+    .predictive-search__loading-state {
+      display: none;
+    }
+  {%- endstyle -%}
+{% endcomment %}
+
+<div
+  x-data="
+        {
+            search: '',
+            predictiveResult: '',
+            loading: true,
+    getSearchResults(e) {
+      console.log(e.target.value);
+      fetch(`/search/suggest?q=${e.target.value}&section_id=predictive-search`).then((response) => {
+        if (!response.ok) {
+          var error = new Error(response.status);
+          this.close();
+          throw error;
+        }
+        this.loading = false
+        return response.text();
+      }).then((text)=>{
+        this.predictiveResult = text;
+
+    });
+    }
+        }
+  "
+  class="w-full pb-16 pt-14 bg-[#f5efe7] px-5 flex flex-col justify-center items-center relative"
+>
+  <form
+    action="{{ routes.search_url }}"
+    onsubmit="(e)=>e.preventDefault()"
+    method="get"
+    class="w-full"
+  >
+    <div class="relative max-w-6xl w-full mx-auto">
+      <div class="w-full border-b border-[#dcd6ce] max-w-[62rem] ">
+        <input
+          x-on:input.change.debounce.300ms="getSearchResults($event)"
+          placeholder="Search"
+          x-model="search"
+          name="q"
+          class="w-full bg-inherit focus-visible:outline-none focus-visible:shadow-none py-3 pr-[4.5rem] pl-4 lg:pl-2 lg:pr-20 text-left appearance-none relative outline-none placeholder:text-current placeholder:opacity-60"
+          value="{{ search.terms | escape }}"
+        >
+      </div>
+    </div>
+  </form>
+  <div
+    x-show="search != ''"
+    x-html="predictiveResult"
+    class="w-full max-w-[62rem] mx-auto pt-6 absolute top-[calc(50%+12px)] z-10"
+  ></div>
+</div>
+
+{% schema %}
+{
+  "name": "Search",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Search"
+    }
+  ]
+}
+{% endschema %}
