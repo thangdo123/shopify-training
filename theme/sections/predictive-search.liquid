@@ -1,6 +1,6 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 
-<div class="bg-[#f5f0e7] shadow-[0_0_6px_-4px_#574136] pt-6">
+<div class="bg-[#f5efe7] shadow-[0_0_6px_-4px_#574136] pt-6">
   {%- if predictive_search.performed -%}
     {% assign first_column_results_size = predictive_search.resources.queries.size
       | plus: predictive_search.resources.collections.size
@@ -15,34 +15,39 @@
       {%- if first_column_results_size > 0 or predictive_search.resources.products.size > 0 -%}
         <div
           id="predictive-search-results-groups-wrapper"
-          class="{% unless predictive_search.resources.products.size > 0 %} {% endunless %}{% unless predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 %} {% endunless %}"
+          class="flex flex-col{% unless predictive_search.resources.products.size > 0 %}flex {% endunless %}{% unless predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 %} flex{% endunless %}"
         >
       {%- endif -%}
       {%- if first_column_results_size > 0 -%}
-        <div class="predictive-search__result-group">
+        <div class="flex flex-row">
       {%- endif -%}
       {%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 -%}
         <div>
           <h2
             id="predictive-search-queries"
-            class="predictive-search__heading text-body caption-with-letter-spacing"
+            class="pl-6 pr-6 lg:pl-10 lg:pr-10 pt-2 pb-5 uppercase text-xs md:text-sm"
           >
             {{- 'templates.search.suggestions' | t -}}
           </h2>
           <ul
             id="predictive-search-results-queries-list"
-            class="flex flex-wrap"
+            class="flex flex-wrap pl-6 pr-6 pb-7 lg:pl-10 lg:pr-10 gap-5"
             role="group"
             aria-labelledby="predictive-search-queries"
           >
             {%- for query in predictive_search.resources.queries -%}
+              {%- if predictive_search.resources.queries.size > 2 -%}
+                {%- if forloop.index == 3 -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endif -%}
               <li
                 id="predictive-search-option-query-{{ forloop.index }}"
                 class="predictive-search__list-item"
                 role="option"
                 aria-selected="false"
               >
-                <a href="{{ query.url }}" class="predictive-search__item link link--text" tabindex="-1">
+                <a href="{{ query.url }}" class="" tabindex="-1">
                   <div class="predictive-search__item-content predictive-search__item-content--centered">
                     <p
                       class="predictive-search__item-heading predictive-search__item-query-result h5"
@@ -54,34 +59,38 @@
                 </a>
               </li>
             {%- endfor -%}
-            {%- for collection in predictive_search.resources.collections -%}
-              <li
-                id="predictive-search-option-collection-{{ forloop.index }}"
-                class="predictive-search__list-item"
-                role="option"
-                aria-selected="false"
-              >
-                <a href="{{ collection.url }}" class="predictive-search__item link link--text" tabindex="-1">
-                  <div class="predictive-search__item-content predictive-search__item-content--centered">
-                    <p class="predictive-search__item-heading h5">{{ collection.title | escape }}</p>
-                  </div>
-                </a>
-              </li>
-            {%- endfor -%}
+
+            {%- if predictive_search.resources.queries.size < 2 -%}
+              {%- for collection in predictive_search.resources.collections -%}
+                <li
+                  id="predictive-search-option-collection-{{ forloop.index }}"
+                  class="predictive-search__list-item"
+                  role="option"
+                  aria-selected="false"
+                >
+                  <a href="{{ collection.url }}" class="" tabindex="-1">
+                    <div class="predictive-search__item-content predictive-search__item-content--centered">
+                      <p class="predictive-search__item-heading h5">{{ collection.title | escape }}</p>
+                    </div>
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
         </div>
       {%- endif -%}
+      <div class="border-l border-[#dcd6cb] flex-shrink-0 lg:mb-5"></div>
       {%- if predictive_search.resources.articles.size > 0 or predictive_search.resources.pages.size > 0 -%}
         <div class="predictive-search__pages-wrapper">
           <h2
             id="predictive-search-pages-desktop"
-            class="predictive-search__heading text-body caption-with-letter-spacing"
+            class="pl-6 pr-6 lg:pl-10 lg:pr-10 pt-2 pb-5 uppercase text-xs md:text-sm"
           >
             {{- 'templates.search.pages' | t -}}
           </h2>
           <ul
             id="predictive-search-results-pages-list-desktop"
-            class="predictive-search__results-list list-unstyled"
+            class="flex flex-wrap pl-6 pr-6 pb-7 lg:pl-10 lg:pr-10 gap-5"
             role="group"
             aria-labelledby="predictive-search-pages-desktop"
           >
@@ -92,7 +101,7 @@
                 role="option"
                 aria-selected="false"
               >
-                <a href="{{ page.url }}" class="predictive-search__item link link--text" tabindex="-1">
+                <a href="{{ page.url }}" class="" tabindex="-1">
                   <div class="predictive-search__item-content predictive-search__item-content--centered">
                     <p class="predictive-search__item-heading h5">{{ page.title | escape }}</p>
                   </div>
@@ -106,7 +115,7 @@
                 role="option"
                 aria-selected="false"
               >
-                <a href="{{ article.url }}" class="predictive-search__item link link--text" tabindex="-1">
+                <a href="{{ article.url }}" class="" tabindex="-1">
                   <div class="predictive-search__item-content predictive-search__item-content--centered">
                     <p class="predictive-search__item-heading h5">{{ article.title | escape }}</p>
                   </div>
@@ -128,13 +137,13 @@
             <div>
               <h2
                 id="predictive-search-products"
-                class="predictive-search__heading text-body caption-with-letter-spacing"
+                class="pl-6 pr-6 lg:pl-10 lg:pr-10 pt-2 pb-5 uppercase text-xs md:text-sm"
               >
                 {{- 'templates.search.products' | t -}}
               </h2>
               <ul
                 id="predictive-search-results-products-list"
-                class="predictive-search__results-list list-unstyled"
+                class="flex flex-col flex-wrap pl-6 pr-6 pb-7 lg:pl-10 lg:pr-10 gap-5"
                 role="group"
                 aria-labelledby="predictive-search-products"
               >
@@ -147,7 +156,7 @@
                   >
                     <a
                       href="{{ product.url }}"
-                      class="predictive-search__item predictive-search__item--link-with-thumbnail link link--text"
+                      class="flex flex-row gap-5"
                       tabindex="-1"
                     >
                       {%- if product.featured_media != blank -%}
@@ -181,13 +190,13 @@
             <div class="predictive-search__pages-wrapper">
               <h2
                 id="predictive-search-pages-mobile"
-                class="predictive-search__heading text-body caption-with-letter-spacing"
+                class="pl-6 pr-6 lg:pl-10 lg:pr-10 pt-2 pb-5 uppercase text-xs md:text-sm"
               >
                 {{- 'templates.search.pages' | t -}}
               </h2>
               <ul
                 id="predictive-search-results-pages-list-mobile"
-                class="predictive-search__results-list list-unstyled"
+                class="flex flex-wrap pl-6 pr-6 pb-7 lg:pl-10 lg:pr-10 gap-5"
                 role="group"
                 aria-labelledby="predictive-search-pages-mobile"
               >
@@ -232,24 +241,26 @@
         {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
       </div>
 
-      {%- assign total_results = predictive_search.resources.products.size | plus: first_column_results_size -%}
-      {% if total_results > 0 %}
-        <div id="predictive-search-option-search-keywords" class="predictive-search__search-for-button">
-          <button
-            class="predictive-search__item predictive-search__item--term link link--text h5 animate-arrow"
-            tabindex="-1"
-            role="option"
-            aria-selected="false"
-          >
-            <span data-predictive-search-search-for-text>
-              {{- 'templates.search.search_for' | t: terms: predictive_search.terms -}}
-            </span>
-            <span class="svg-wrapper">
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
-            </span>
-          </button>
-        </div>
-      {% endif %}
+      {% comment %}
+        {%- assign total_results = predictive_search.resources.products.size | plus: first_column_results_size -%}
+        {% if total_results > 0 %}
+          <div id="predictive-search-option-search-keywords" class="predictive-search__search-for-button">
+            <button
+              class="predictive-search__item predictive-search__item--term link link--text h5 animate-arrow"
+              tabindex="-1"
+              role="option"
+              aria-selected="false"
+            >
+              <span data-predictive-search-search-for-text>
+                {{- 'templates.search.search_for' | t: terms: predictive_search.terms -}}
+              </span>
+              <span class="svg-wrapper">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+            </button>
+          </div>
+        {% endif %}
+      {% endcomment %}
     </div>
 
     <span class="text-center pt-5 pb-5 pl-5 pr-5 block w-full" data-predictive-search-live-region-count-value>
@@ -257,19 +268,6 @@
         assign total_results = predictive_search.resources.products.size | plus: first_column_results_size
         if total_results == 0
           echo 'templates.search.no_results' | t: terms: predictive_search.terms
-        else
-          echo 'templates.search.results_with_count' | t: count: total_results | append: ': '
-          if predictive_search.resources.queries.size > 0
-            assign count = predictive_search.resources.queries.size | plus: predictive_search.resources.collections.size
-            echo 'templates.search.results_suggestions_with_count' | t: count: count | append: ', '
-          endif
-          if predictive_search.resources.pages.size > 0
-            assign count = predictive_search.resources.pages.size | plus: predictive_search.resources.articles.size
-            echo 'templates.search.results_pages_with_count' | t: count: count | append: ', '
-          endif
-          if predictive_search.resources.products.size > 0
-            echo 'templates.search.results_products_with_count' | t: count: predictive_search.resources.products.size
-          endif
         endif
       %}
     </span>

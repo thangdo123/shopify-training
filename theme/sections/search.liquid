@@ -38,16 +38,16 @@
     }
         }
   "
-  class="w-full pb-16 pt-14 bg-[#f5efe7] px-5 flex flex-col justify-center items-center relative"
+  class="w-full pb-16 pl-5 pr-5 lg:pl-24 lg:pr-24 pt-14 lg:pb-16 bg-[#f5efe7] flex flex-col justify-center items-center relative"
 >
   <form
     action="{{ routes.search_url }}"
     onsubmit="(e)=>e.preventDefault()"
     method="get"
-    class="w-full"
+    class="relative max-w-6xl w-full"
   >
-    <div class="relative max-w-6xl w-full mx-auto">
-      <div class="w-full border-b border-[#dcd6ce] max-w-[62rem] ">
+    <div class="relative max-w-[62rem] w-full mx-auto border-[#dcd6ce] ">
+      <div class="w-full border-b">
         <input
           x-on:input.change.debounce.300ms="getSearchResults($event)"
           placeholder="Search"
@@ -57,13 +57,29 @@
           value="{{ search.terms | escape }}"
         >
       </div>
+      <button
+        class="btn-search absolute none_border w-7 h-7 p-1 top-1/2 -translate-y-1/2 opacity-60 bg-none text-current lg:right-2 right-2"
+        aria-label="Search..."
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 19 18"
+          fill="none"
+          style="fill: none;"
+        >
+          <path d="M9.2665 16.2001C13.4639 16.2001 16.8665 12.7975 16.8665 8.60009C16.8665 4.40272 13.4639 1.00009 9.2665 1.00009C5.06914 1.00009 1.6665 4.40272 1.6665 8.60009C1.6665 12.7975 5.06914 16.2001 9.2665 16.2001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M17.6669 16.9999L16.0669 15.3999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <div
+        x-show="search != ''"
+        x-html="predictiveResult"
+        class="w-full max-w-[62rem] mx-auto pt-6 absolute top-[calc(50%+12px)] z-10"
+      ></div>
     </div>
   </form>
-  <div
-    x-show="search != ''"
-    x-html="predictiveResult"
-    class="w-full max-w-[62rem] mx-auto pt-6 absolute top-[calc(50%+12px)] z-10"
-  ></div>
 </div>
 
 {% schema %}
