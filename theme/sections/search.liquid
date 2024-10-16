@@ -38,15 +38,15 @@
     }
         }
   "
-  class="w-full pb-16 pl-5 pr-5 lg:pl-24 lg:pr-24 pt-14 lg:pb-16 bg-[#f5efe7] flex flex-col justify-center items-center relative"
+  class="w-full pb-16 pl-5 pr-5 lg:px-[96px] pt-[56px] lg:pb-[64px] bg-[#f5efe7] flex flex-col justify-center items-center relative"
 >
   <form
     action="{{ routes.search_url }}"
     onsubmit="(e)=>e.preventDefault()"
     method="get"
-    class="relative max-w-6xl w-full"
+    class="relative w-full"
   >
-    <div class="relative max-w-[62rem] w-full mx-auto border-[#dcd6ce] ">
+    <div class="relative max-w-[992px] w-full mx-auto border-[#dcd6ce] ">
       <div class="w-full border-b">
         <input
           x-on:input.change.debounce.300ms="getSearchResults($event)"
@@ -76,7 +76,7 @@
       <div
         x-show="search != ''"
         x-html="predictiveResult"
-        class="w-full max-w-[62rem] mx-auto pt-6 absolute top-[calc(50%+12px)] z-10"
+        class="w-full max-w-[992px] mx-auto pt-6 absolute top-[calc(50%+12px)] z-10"
       ></div>
     </div>
   </form>
