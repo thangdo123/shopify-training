@@ -664,6 +664,18 @@ video {
   top: 0px;
 }
 
+.top-\[-50\%\] {
+  top: -50%;
+}
+
+.top-\[100\%\] {
+  top: 100%;
+}
+
+.top-\[50\%\] {
+  top: 50%;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -678,6 +690,10 @@ video {
 
 .z-20 {
   z-index: 20;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .mx-auto {
