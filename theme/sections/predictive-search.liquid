@@ -131,7 +131,7 @@
                         tabindex="-1"
                       >
                         {%- if product.featured_media != blank -%}
-                          <div class="w-[96px] overflow-hidden">
+                          <div class="w-[96px] overflow-hidden h-[128px]">
                             <img
                               class="w-full h-full hover:scale-105 object-cover will-change-transform ease-out duration-500"
                               src="{{ product.featured_media | image_url: width: 150 }}"
@@ -141,13 +141,18 @@
                             >
                           </div>
                         {%- endif -%}
-                        <div class="flex-1">
+                        <div class="flex-1 pt-[8px]">
                           {% comment %} <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span> {% endcomment %}
                           <div class="text-[12px] md:text-[14px] uppercase">
                             {{ product.vendor }}
                           </div>
                           <p class="hover:text-[#d7c2a5] duration-200">{{ product.title | escape }}</p>
-                          {% render 'price', product: product, use_variant: true, show_badges: false %}
+                          {% render 'price',
+                            product: product,
+                            use_variant: true,
+                            show_badges: false,
+                            price_class: '!text-[12px]'
+                          %}
                         </div>
                       </a>
                     </li>
@@ -302,7 +307,7 @@
                   tabindex="-1"
                 >
                   {%- if product.featured_media != blank -%}
-                    <div class="w-[96px] overflow-hidden">
+                    <div class="w-[96px] overflow-hidden pb-[10px]">
                       <img
                         class="w-full h-full hover:scale-105 object-cover will-change-transform ease-out duration-500"
                         src="{{ product.featured_media | image_url: width: 150 }}"
@@ -312,7 +317,7 @@
                       >
                     </div>
                   {%- endif -%}
-                  <div class="flex-1">
+                  <div class="flex-1 pt-[8px]">
                     {% comment %} <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span> {% endcomment %}
                     <div class="text-[12px] md:text-[14px] uppercase">
                       {{ product.vendor }}
@@ -338,7 +343,7 @@
   {%- endif -%}
 
   {%- if total_results > 0 -%}
-    <button class="shadow-[0_0_6px_-4px_#574136] pt-5 pb-5 pl-6 pr-6 lg:pl-9 lg:pr-9 border-solid rounded-none inline-block cursor-pointer hover-text-link text-center w-full text-current border-t">
+    <button class="shadow-[0_0_6px_-4px_#574136] pt-5 pb-5 pl-6 pr-6 lg:pl-9 lg:pr-9 border-solid rounded-none inline-block cursor-pointer text-[12px] md:text-[14px] text-center w-full text-current border-t">
       View all
     </button>
   {%- endif -%}
