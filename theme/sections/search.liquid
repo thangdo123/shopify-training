@@ -7,7 +7,7 @@
             sortByCategory: 'All categories',
             openSortModal: false,
             atTop: false,
-            close() {this.search = ''},
+            close() {this.search = ''; this.openSortModal = false},
     getSearchResults() {
       fetch(`/search/suggest?q=${this.sortByCategory !== 'All categories' ? `${this.sortByCategory} AND ` : ''}${this.search}&section_id=predictive-search&resources[type]=product,query,collection,page,article&resources[limit]=6`).then((response) => {
         if (!response.ok) {
@@ -21,15 +21,35 @@
         this.predictiveResult = text;
 
     });
-    }
+    },
+    lastScrollTop: 0,
+      scrollDirection: 'up',
+
+      handleScroll() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        this.atTop = (currentScroll < 50)? false: true;
+        if (currentScroll > this.lastScrollTop) {
+          // Scrolling down
+          this.scrollDirection = 'down';
+        } else {
+          // Scrolling up
+          this.scrollDirection = 'up';
+        }
+
+        this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For mobile or negative scrolling
+      }
         }
   "
-  class="w-full h-full pb-16 pl-5 pr-5 lg:px-[96px] pt-[56px] lg:pb-[64px] bg-[#f5efe7] flex flex-col justify-center items-center relative"
+  id="my-search"
+  @scroll.window=" handleScroll()"
+
+  :class="scrollDirection === 'up' ? (atTop ? 'fixed top-0 z-20' : 'relative') : 'fixed top-[-10%] z-20'"
+  class="w-full pb-16 pl-5 pr-5 lg:px-[96px] pt-[56px] lg:pb-[64px] bg-[#f5efe7] flex flex-col justify-center items-center transition-all duration-300 ease-in-out"
 >
   <button
     id="SearchClose"
     class="cursor-pointer h-[40px] w-[44px] p-5 absolute top-1 opacity-60 right-2"
-    x-on:click="close(); openSortModal = false"
+    x-on:click="close()"
   >
     <svg width="100%" height="100%" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0.757812 8.75781L4.75782 4.75783M4.75782 4.75783L8.7578 0.757812M4.75782 4.75783L0.757812 0.757812M4.75782 4.75783L8.7578 8.75781" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
