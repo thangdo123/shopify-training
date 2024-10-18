@@ -108,14 +108,13 @@
             <div class="w-full border-b flex">
               {%- if settings.enable_refined_search -%}
                 <div class="relative w-[112px] md:w-[176px] pt-3 pb-3 pr-[4.5rem] pl-4 lg:pr-2 lg:pl-2">
-                  <div class="group">
+                  <div class="group" @click="openSortModal = !openSortModal">
                     <div
                       x-text="sortByCategory"
                       class="text-[12px] md:text-[14px] text-nowrap cursor-pointer group-hover:text-[#d7c2a5] duration-200"
-                      @click="openSortModal = !openSortModal"
                     ></div>
                     <span
-                      class="opacity-60 absolute w-3 h-3 top-1/2 -translate-y-1/2 flex right-[10px] group-hover:text-[#d7c2a5] duration-200"
+                      class="opacity-60 absolute w-3 h-3 top-1/2 -translate-y-1/2 flex right-[10px] group-hover:text-[#d7c2a5] duration-200 cursor-pointer"
                       :class="openSortModal ?'-rotate-180':'' "
                     >
                       <svg
