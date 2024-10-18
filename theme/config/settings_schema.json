@@ -8,6 +8,98 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Search and navigation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "Enable search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_refined_search",
+        "label": "Enable refined search box",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "search_results",
+        "label": "Search results",
+        "options": [
+          {
+            "value": "product",
+            "label": "Products only"
+          },
+          {
+            "value": "product,collection",
+            "label": "Products and collection"
+          },
+          {
+            "value": "product,page,article",
+            "label": "Products, page and article"
+          },
+          {
+            "value": "product,page",
+            "label": "Products and page"
+          },
+          {
+            "value": "product,page,article,collection",
+            "label": "All content"
+          },
+        ],
+        "default": "product,page,article,collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_suggestions",
+        "label": "Enable product suggestions",
+        "info": "Live search results. Not available in all languages.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search_vendor",
+        "label": "Show vendor",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search_price",
+        "label": "Show price",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "desktop_maximum_results",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "Desktop maximum results",
+        "default": 6
+      },
+      {
+        "type": "range",
+        "id": "mobile_maximum_results",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "label": "Mobile maximum results",
+        "default": 3
+      },
+      {
+        "type": "checkbox",
+        "id": "show_view_more",
+        "label": "Show \"View more\" button",
+        "default": true
+      },
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

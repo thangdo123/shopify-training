@@ -33,13 +33,13 @@
           <div class="flex-1 border-b border-[#dcd6cb]">
             <h2
               id="predictive-search-queries"
-              class="pl-6 pr-6 lg:px-10 pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
+              class="pl-[24px] pr-[24px] lg:pr-[40px] lg:pl-[40px] pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
             >
               {{- 'templates.search.suggestions' | t -}}
             </h2>
             <ul
               id="predictive-search-results-queries-list"
-              class="flex flex-wrap pl-6 pr-6 pb-[28px] lg:px-10 gap-5"
+              class="flex flex-wrap pl-[24px] pr-[24px] pb-[28px] lg:pr-[40px] lg:pl-[40px] gap-5"
               role="group"
               aria-labelledby="predictive-search-queries"
             >
@@ -67,13 +67,13 @@
           <div class="flex-1 border-b border-[#dcd6cb]">
             <h2
               id="predictive-search-pages-desktop"
-              class="pl-6 pr-6 lg:px-10 pt-[24px] lg:pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
+              class="pl-[24px] pr-[24px] lg:pr-[40px] lg:pl-[40px] pt-[24px] lg:pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
             >
               {{- 'templates.search.pages' | t -}}
             </h2>
             <ul
               id="predictive-search-results-pages-list-desktop"
-              class="flex flex-wrap pl-6 pr-6 pb-[28px] lg:px-10 gap-5"
+              class="flex flex-wrap pl-[24px] pr-[24px] pb-[28px] lg:pr-[40px] lg:pl-[40px] gap-5"
               role="group"
               aria-labelledby="predictive-search-pages-desktop"
             >
@@ -108,13 +108,13 @@
               <div class="flex-1">
                 <h2
                   id="predictive-search-products"
-                  class="pl-6 pr-6 lg:px-10 pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
+                  class="pl-[24px] pr-[24px] lg:pr-[40px] lg:pl-[40px] pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
                 >
                   {{- 'templates.search.products' | t -}}
                 </h2>
                 <ul
                   id="predictive-search-results-products-list"
-                  class="flex flex-col flex-wrap pl-6 pr-6 pb-[28px] lg:px-10 gap-5 break-all"
+                  class="flex flex-col flex-wrap pl-[24px] pr-[24px] pb-[28px] lg:pr-[40px] lg:pl-[40px] gap-5 break-all"
                   role="group"
                   aria-labelledby="predictive-search-products"
                 >
@@ -143,16 +143,20 @@
                         {%- endif -%}
                         <div class="flex-1 pt-[8px]">
                           {% comment %} <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span> {% endcomment %}
-                          <div class="text-[12px] md:text-[14px] uppercase">
-                            {{ product.vendor }}
-                          </div>
+                          {%- if settings.show_search_vendor -%}
+                            <div class="text-[12px] md:text-[14px] uppercase">
+                              {{ product.vendor }}
+                            </div>
+                          {%- endif -%}
                           <p class="hover:text-[#d7c2a5] duration-200">{{ product.title | escape }}</p>
-                          {% render 'price',
-                            product: product,
-                            use_variant: true,
-                            show_badges: false,
-                            price_class: '!text-[12px]'
-                          %}
+                          {%- if settings.show_search_price -%}
+                            {% render 'price',
+                              product: product,
+                              use_variant: true,
+                              show_badges: false,
+                              price_class: '!text-[12px]'
+                            %}
+                          {%- endif -%}
                         </div>
                       </a>
                     </li>
@@ -165,13 +169,13 @@
               <div class="flex-1">
                 <h2
                   id="predictive-search-products"
-                  class="pl-6 pr-6 lg:px-10 pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
+                  class="pl-[24px] pr-[24px] lg:pr-[40px] lg:pl-[40px] pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
                 >
                   {{- 'templates.search.collections' | t -}}
                 </h2>
                 <ul
                   id="predictive-search-results-products-list"
-                  class="flex flex-col flex-wrap pl-6 pr-6 pb-[28px] lg:px-10 gap-5 break-all"
+                  class="flex flex-col flex-wrap pl-[24px] pr-[24px] pb-[28px] lg:pr-[40px] lg:pl-[40px] gap-5 break-all"
                   role="group"
                   aria-labelledby="predictive-search-products"
                 >
@@ -208,13 +212,13 @@
               <div class=" flex-1">
                 <h2
                   id="predictive-search-pages-mobile"
-                  class="pl-6 pr-6 lg:px-10 pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
+                  class="pl-[24px] pr-[24px] lg:pr-[40px] lg:pl-[40px] pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
                 >
                   {{- 'templates.search.articles' | t -}}
                 </h2>
                 <ul
                   id="predictive-search-results-pages-list-mobile"
-                  class="flex flex-wrap pl-6 pr-6 pb-[28px] lg:px-10 gap-5 break-all"
+                  class="flex flex-wrap pl-[24px] pr-[24px] pb-[28px] lg:pr-[40px] lg:pl-[40px] gap-5 break-all"
                   role="group"
                   aria-labelledby="predictive-search-pages-mobile"
                 >
@@ -281,16 +285,16 @@
 
     {%- if first_column_results_size == 0 -%}
       {%- if predictive_search.resources.products.size > 0 -%}
-        <div class="flex-1">
+        <div class="flex-1 max-h-[60vh] overflow-auto">
           <h2
             id="predictive-search-products"
-            class="pl-6 pr-6 lg:px-10 pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
+            class="pl-[24px] pr-[24px] lg:pr-[40px] lg:pl-[40px] pt-[8px] pb-[20px] uppercase text-[12px] md:text-[14px] text-[#574136]"
           >
             {{- 'templates.search.products' | t -}}
           </h2>
           <ul
             id="predictive-search-results-products-list"
-            class="flex flex-col flex-wrap pl-6 pr-6 pb-[28px] lg:px-10 gap-5 break-all"
+            class="flex flex-col flex-wrap pl-[24px] pr-[24px] pb-[28px] lg:pr-[40px] lg:pl-[40px] gap-5 break-all"
             role="group"
             aria-labelledby="predictive-search-products"
           >
@@ -332,19 +336,23 @@
         </div>
       {%- endif -%}
 
-      <span class="text-center pt-5 pb-5 pl-5 pr-5 block w-full" data-predictive-search-live-region-count-value>
-        {%- liquid
-          if total_results == 0
-            echo 'templates.search.no_results' | t: terms: predictive_search.terms
-          endif
-        %}
-      </span>
+      {%- if total_results == 0 -%}
+        <span class="text-center pt-5 pb-5 pl-5 pr-5 block w-full" data-predictive-search-live-region-count-value>
+          {%- liquid
+            if total_results == 0
+              echo 'templates.search.no_results' | t: terms: predictive_search.terms
+            endif
+          %}
+        </span>
+      {%- endif -%}
     {%- endif -%}
   {%- endif -%}
 
   {%- if total_results > 0 -%}
-    <button class="shadow-[0_0_6px_-4px_#574136] pt-5 pb-5 pl-6 pr-6 lg:pl-9 lg:pr-9 border-solid rounded-none inline-block cursor-pointer text-[12px] md:text-[14px] text-center w-full text-current border-t">
-      View all
-    </button>
+    {%- if settings.show_view_more -%}
+      <button class="shadow-[0_0_6px_-4px_#574136] pt-5 pb-5 pl-[24px] pr-[24px] lg:pl-9 lg:pr-9 border-solid rounded-none inline-block cursor-pointer text-[12px] md:text-[14px] text-center w-full text-current border-t">
+        View all
+      </button>
+    {%- endif -%}
   {%- endif -%}
 </div>

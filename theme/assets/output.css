@@ -232,6 +232,10 @@ strong {
   font-weight: bolder;
 }
 
+[x-cloak] {
+  display: none !important;
+}
+
 /*
 1. Use the user's configured `mono` font-family by default.
 2. Use the user's configured `mono` font-feature-settings by default.
@@ -661,8 +665,16 @@ video {
   margin-right: auto;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mr-\[8px\] {
   margin-right: 8px;
+}
+
+.mr-auto {
+  margin-right: auto;
 }
 
 .line-clamp-2 {
@@ -774,28 +786,13 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.translate-y-0 {
-  --tw-translate-y: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-10 {
-  --tw-translate-y: 2.5rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .-translate-y-10 {
   --tw-translate-y: -2.5rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.-translate-y-0 {
-  --tw-translate-y: -0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-20 {
-  --tw-translate-y: 5rem;
+.translate-y-0 {
+  --tw-translate-y: 0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -896,6 +893,11 @@ video {
   border-style: solid;
 }
 
+.border-\[\#d7c2a5\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(215 194 165 / var(--tw-border-opacity));
+}
+
 .border-\[\#dcd6cb\] {
   --tw-border-opacity: 1;
   border-color: rgb(220 214 203 / var(--tw-border-opacity));
@@ -951,6 +953,10 @@ video {
   padding-bottom: 4rem;
 }
 
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -967,6 +973,10 @@ video {
   padding-bottom: 28px;
 }
 
+.pb-\[4px\] {
+  padding-bottom: 4px;
+}
+
 .pl-4 {
   padding-left: 1rem;
 }
@@ -975,20 +985,32 @@ video {
   padding-left: 1.25rem;
 }
 
-.pl-6 {
-  padding-left: 1.5rem;
+.pl-\[24px\] {
+  padding-left: 24px;
+}
+
+.pl-\[28px\] {
+  padding-left: 28px;
 }
 
 .pr-5 {
   padding-right: 1.25rem;
 }
 
-.pr-6 {
-  padding-right: 1.5rem;
+.pr-\[24px\] {
+  padding-right: 24px;
+}
+
+.pr-\[28px\] {
+  padding-right: 28px;
 }
 
 .pr-\[4\.5rem\] {
   padding-right: 4.5rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .pt-5 {
@@ -1005,6 +1027,10 @@ video {
 
 .pt-\[24px\] {
   padding-top: 24px;
+}
+
+.pt-\[4px\] {
+  padding-top: 4px;
 }
 
 .pt-\[56px\] {
@@ -1048,16 +1074,17 @@ video {
   color: rgb(87 65 54 / var(--tw-text-opacity));
 }
 
+.text-\[\#d7c2a5\] {
+  --tw-text-opacity: 1;
+  color: rgb(215 194 165 / var(--tw-text-opacity));
+}
+
 .text-current {
   color: currentColor;
 }
 
 .underline {
   text-decoration-line: underline;
-}
-
-.opacity-60 {
-  opacity: 0.6;
 }
 
 .opacity-0 {
@@ -1068,12 +1095,8 @@ video {
   opacity: 1;
 }
 
-.opacity-80 {
-  opacity: 0.8;
-}
-
-.opacity-50 {
-  opacity: 0.5;
+.opacity-60 {
+  opacity: 0.6;
 }
 
 .shadow {
@@ -1291,11 +1314,6 @@ video {
     flex-direction: row;
   }
 
-  .lg\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-
   .lg\:px-2 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -1318,12 +1336,32 @@ video {
     padding-left: 2.25rem;
   }
 
+  .lg\:pl-\[40px\] {
+    padding-left: 40px;
+  }
+
+  .lg\:pl-\[96px\] {
+    padding-left: 96px;
+  }
+
+  .lg\:pr-2 {
+    padding-right: 0.5rem;
+  }
+
   .lg\:pr-20 {
     padding-right: 5rem;
   }
 
   .lg\:pr-9 {
     padding-right: 2.25rem;
+  }
+
+  .lg\:pr-\[40px\] {
+    padding-right: 40px;
+  }
+
+  .lg\:pr-\[96px\] {
+    padding-right: 96px;
   }
 
   .lg\:pt-\[8px\] {
